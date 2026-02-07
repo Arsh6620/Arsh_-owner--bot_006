@@ -37,7 +37,11 @@ const getTimeInfo = () => {
 
 const createBracket = (info) => `
 ╔═══════════════════════════════════════════╗
-║    🎀 𝗔𝗥𝗬𝗔𝗡 𝗔𝗨𝗧𝗢 🤖 𝗦𝗘𝗡𝗗 𝗦𝗬𝗦𝗧𝗘𝗠 🎀         ║
+║    🎀 ┌────♣─────┐
+       ♦#HAPPY_BIRTHDAY♦
+        TO You Ꭾɪ፝֟፝֟ʜᴜ🙎‍♂️🎂💐               
+•                                                               
+       ╰┉➢😍 🎀        ║
 ╠═══════════════════════════════════════════╣
 ║    ${info.emoji} Time: ${info.time} ${info.emoji}
 ║    📅 Date: ${info.date} ${info.month} ${info.day}
