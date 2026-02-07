@@ -44,6 +44,19 @@ Decide if this is normal chat or coding request and respond accordingly.`;
   // 🔥 ACTIVE APIs (आपको KEYS ADD करनी होंगी)
   const aiServices = [
     {
+      name: "Your Custom API",
+      url: "http://aryan-nitya-ai-api-chat-bot.onrender.com/chat",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: {
+        message: userText,
+        system_prompt: systemPrompt
+      },
+      getReply: (res) => res.data?.reply || res.data?.response || res.data?.message
+    },
+    
+    {
       name: "Groq-Llama3",
       url: "https://api.groq.com/openai/v1/chat/completions",
       headers: {
