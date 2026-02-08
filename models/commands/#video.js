@@ -3,13 +3,13 @@ const fs = require("fs-extra");
 const path = require("path");
 
 module.exports.config = {
-  name: "video", // File/Command name ab "video" hai
-  version: "4.6.0",
+  name: "video",
+  version: "4.7.0",
   hasPermssion: 0,
-  credits: "M.R PRINCE", 
-  description: "Search 1-10 videos with images",
+  credits: "M.R PRINCE",
+  description: "Search 1-10 videos and download (360p+)",
   commandCategory: "Media",
-  usages: "[song name]",
+  usages: "[video name]",
   cooldowns: 5,
   dependencies: {
     "axios": "",
@@ -19,12 +19,17 @@ module.exports.config = {
   }
 };
 
+const nix = "https://raw.githubusercontent.com/aryannix/stuffs/master/raw/apis.json";
+
 module.exports.run = async function({ api, event, args }) {
-  // --- LOCK HATAYE GAYE HAIN ---
+  if (this.config.credits !== "M.R PRINCE") {
+    return api.sendMessage(`❌ [SYSTEM ERROR] : Credit violation detected.`, event.threadID);
+  }
+
   const { threadID, messageID } = event;
   const query = args.join(" ");
 
-  if (!query) return api.sendMessage("❌ Please provide a song name.", threadID, messageID);
+  if (!query) return api.sendMessage("❌ Please provide a video name.", threadID, messageID);
 
   try {
     const yts = require("yt-search");
@@ -33,32 +38,30 @@ module.exports.run = async function({ api, event, args }) {
 
     if (videos.length === 0) return api.sendMessage("❌ No results found.", threadID, messageID);
 
-    let searchList = "🔍 **YouTube Search Results:**\n\n";
-    let attachments = [];
+    let searchList = "🔍 YouTube Search Results (360p+):\n\n";
     const cacheDir = path.join(__dirname, "cache");
     if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
 
     for (let i = 0; i < videos.length; i++) {
       searchList += `${i + 1}. ${videos[i].title} [${videos[i].timestamp}]\n\n`;
-
-      const imgPath = path.join(cacheDir, `thumb_${Date.now()}_${i}.jpg`);
-      const imgRes = await axios.get(videos[i].image, { responseType: 'arraybuffer' });
-      fs.writeFileSync(imgPath, Buffer.from(imgRes.data));
-      attachments.push(fs.createReadStream(imgPath));
     }
 
-    searchList += `»»𝑶𝑾𝑵𝑬𝑹««★™  »»𝑴.𝒓 𝑷𝒓𝒊𝒏𝒄𝒆««\n          🥀𝒀𝑬 𝑳𝑶 𝑩𝑨𝑩𝒀 𝑨𝑷𝑲𝑰👉 VIDEO LIST`;
+    searchList += `»»𝑶𝑾𝑵𝑬𝑹««★™  »»𝐌.𝐑 𝐏𝐑𝐈𝐍𝐂𝐄««\n          🥀𝒀𝑬 𝑳𝑶 𝑩𝑨𝑩𝒀 𝑨𝑷𝑲𝑰👉 VIDEO LIST`;
 
-    return api.sendMessage({
-      body: searchList,
-      attachment: attachments
-    }, threadID, (err, info) => {
-      global.client.handleReply.push({
+    return api.sendMessage(searchList, threadID, (err, info) => {
+      const replyObj = {
         name: this.config.name,
+        commandName: this.config.name,
         messageID: info.messageID,
         author: event.senderID,
         videos: videos
-      });
+      };
+
+      if (global.client && global.client.handleReply) {
+        global.client.handleReply.push(replyObj);
+      } else if (global.GoatBot && global.GoatBot.onReply) {
+        global.GoatBot.onReply.set(info.messageID, replyObj);
+      }
     }, messageID);
 
   } catch (err) {
@@ -68,43 +71,66 @@ module.exports.run = async function({ api, event, args }) {
 
 module.exports.handleReply = async function({ api, event, handleReply }) {
   const { threadID, messageID, body, senderID } = event;
-
   if (handleReply.author !== senderID) return;
 
   const choice = parseInt(body);
-  if (isNaN(choice) || choice < 1 || choice > 10) {
-    return api.sendMessage("❌ Galat choice! 1-10 ke beech reply dein.", threadID, messageID);
+  if (isNaN(choice) || choice < 1 || choice > handleReply.videos.length) {
+    return api.sendMessage("❌ Invalid choice! Choose 1-10.", threadID, messageID);
   }
 
   const selectedVideo = handleReply.videos[choice - 1];
-  api.unsendMessage(handleReply.messageID);
+  if (handleReply.messageID) api.unsendMessage(handleReply.messageID);
 
-  const downloadWait = await api.sendMessage(`✅ Apki Request Jari Hai Please wait...`, threadID);
+  const waitMsg = await api.sendMessage(`✅ Apki Request Jari Hai Please wait...`, threadID);
 
   try {
-    const apiUrl = `https://anabot.my.id/api/download/ytmp4?url=${encodeURIComponent(selectedVideo.url)}&quality=360&apikey=freeApikey`;
-    const fetchRes = await axios.get(apiUrl);
+    const apiConfig = await axios.get(nix);
+    const nixtubeApi = apiConfig.data.nixtube;
 
-    if (!fetchRes.data.success) throw new Error("Server busy or down.");
+    // Yahan resolution 360p set kiya gaya hai
+    const res = await axios.get(`${nixtubeApi}?url=${encodeURIComponent(selectedVideo.url)}&type=video&quality=360`);
 
-    const downloadUrl = fetchRes.data.data.result.urls;
+    const downloadUrl = res.data.downloadUrl || (res.data.data && res.data.data.downloadUrl);
+    if (!downloadUrl) throw new Error("Failed to get download link.");
+
     const cachePath = path.join(__dirname, "cache", `${Date.now()}.mp4`);
 
-    const downloadRes = await axios.get(downloadUrl, { responseType: 'arraybuffer' });
-    fs.outputFileSync(cachePath, Buffer.from(downloadRes.data));
+    const response = await axios({
+      method: 'GET',
+      url: downloadUrl,
+      responseType: 'stream'
+    });
 
-    const msg = {
-      body: `🏷️ Title: ${selectedVideo.title}\n\n»»𝑶𝑾𝑵𝑬𝑹««★™  »»𝑴.𝒓 𝑷𝒓𝒊𝒏𝒄𝒆««\n          🥀𝒀𝑬 𝑳𝑶 𝑩𝑨𝑩𝒀 𝑨𝑷𝑲𝑰👉 YOUR VIDEO`,
-      attachment: fs.createReadStream(cachePath)
-    };
+    const writer = fs.createWriteStream(cachePath);
+    response.data.pipe(writer);
 
-    return api.sendMessage(msg, threadID, () => {
-      if (fs.existsSync(cachePath)) fs.unlinkSync(cachePath);
-      api.unsendMessage(downloadWait.messageID);
-    }, messageID);
+    writer.on('finish', async () => {
+      const stats = fs.statSync(cachePath);
+      const fileSizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
+
+      // Limit 100MB
+      if (stats.size > 104857600) { 
+        fs.unlinkSync(cachePath);
+        api.unsendMessage(waitMsg.messageID);
+        return api.sendMessage(`⚠️ Size: ${fileSizeInMB}MB (Limit Exceeded).\n\n🔗 Link: ${downloadUrl}`, threadID, messageID);
+      }
+
+      const msg = {
+        body: `🖤 Title: ${selectedVideo.title}\n📊 Quality: 360p\n📦 Size: ${fileSizeInMB}MB\n\n»»𝑶𝑾𝑵𝑬𝑹««★™  »»𝐌.𝐑 𝐏𝐑𝐈𝐍𝐂𝐄««\n🥀𝒀𝑬 𝑳𝑶 𝑩𝑨𝑩𝒀 𝑨𝑷𝑲𝑰👉MUSIC-VIDEO`,
+        attachment: fs.createReadStream(cachePath)
+      };
+
+      return api.sendMessage(msg, threadID, (err) => {
+        if (err) {
+            api.sendMessage(`❌ Messenger failed to send file. Try link:\n${downloadUrl}`, threadID, messageID);
+        }
+        if (fs.existsSync(cachePath)) fs.unlinkSync(cachePath);
+        api.unsendMessage(waitMsg.messageID);
+      }, messageID);
+    });
 
   } catch (err) {
-    if (downloadWait) api.unsendMessage(downloadWait.messageID);
+    if (waitMsg) api.unsendMessage(waitMsg.messageID);
     return api.sendMessage(`❌ Error: ${err.message}`, threadID, messageID);
   }
 };
