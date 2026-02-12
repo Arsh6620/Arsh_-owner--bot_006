@@ -37,11 +37,7 @@ const getTimeInfo = () => {
 
 const createBracket = (info) => `
 ╔═══════════════════════════════════════════╗
-║    🎀 ┌────♣─────┐
-       ♦#HAPPY_BIRTHDAY♦
-        TO You Ꭾɪ፝֟፝֟ʜᴜ🙎‍♂️🎂💐               
-•                                                               
-       ╰┉➢😍 🎀        ║
+║ 🎀 𝘼𝙍𝙎𝙃< 𝗔𝗨𝗧𝗢 🤖 𝗦𝗘𝗡𝗗 𝗦𝗬𝗦𝗧𝗘𝗠 🎀        ║
 ╠═══════════════════════════════════════════╣
 ║    ${info.emoji} Time: ${info.time} ${info.emoji}
 ║    📅 Date: ${info.date} ${info.month} ${info.day}
