@@ -4,33 +4,33 @@
 
 # ARSH-KING.js 
 
-priyansh.newVersionDetected=𝐘𝐨𝐮 𝐚𝐫𝐞 𝐮𝐬𝐢𝐧𝐠 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 %1, 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐢𝐬 %2. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐩𝐝𝐚𝐭𝐞 𝐭𝐨 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐟𝐨𝐫 𝐛𝐞𝐭𝐭𝐞𝐫 𝐛𝐨𝐭 𝐩𝐞𝐫𝐟𝐨𝐫𝐦𝐚𝐧𝐜𝐞. 𝐅𝐨𝐫 𝐮𝐩𝐝𝐚𝐭𝐞 𝐭𝐲𝐩𝐞 𝐢𝐧 𝐜𝐨𝐧𝐬𝐨𝐥𝐞/𝐜𝐦𝐝: 𝐧𝐨𝐝𝐞 𝐮𝐩𝐝𝐚𝐭𝐞
-priyansh.errorFormat=Malformed module!
-priyansh.nameExist=Module's name is similar to another module!
-priyansh.notFoundLanguage=Module %1 don't support your language
-priyansh.notFoundPackage=Can't find package %1 support for module %2, installing...
-priyansh.cantInstallPackage=Can't install package %1 for module %2, error: %3
-priyansh.loadedPackage=Installed whole package successfully for module %1
-priyansh.loadedConfig=Installed config successfully for module %1
-priyansh.cantLoadConfig=Can't install config of module %1, error: %2
-priyansh.cantOnload=Can't launch setup of module %1, error: %1
-priyansh.successLoadModule=Successfully installed module %1
-priyansh.failLoadModule=Can't install module %1, error: %2
-priyansh.finishLoadModule=Installed %1 module commands and %2 module events successfully 
-priyansh.foundPathAppstate=Found appstate file now logging in...
-priyansh.notFoundPathAppstate=Error can't find appstate file maybe file is malformed!
-priyansh.checkListGban=Checking global ban list...
-priyansh.banDevice=Your device have been banned from ArshKingProject, please contact the owner to know more information.
-priyansh.keyNotSameFormat=Wrong format, code must contain 6 number.
-priyansh.codeInputExpired=Your code is wrong or out of date.
-priyansh.unbanDeviceSuccess=Your device are unban now, please restart to use.
-priyansh.userBanned=You had been banned from ArshKingProject when %1 with reason: %2.
-priyansh.finishCheckListGban=Checked global ban list
-priyansh.handleListenError=handleListene has occurred some unexpected errorr, error : %1
-priyansh.warningSourceCode=DETECTED THAT SOURCE CODE'S STRUCTURE HAD BEEN CHANGED , STOP NOW!
-priyansh.refreshListen=Refreshed handleListener...
-priyansh.successConnectDatabase=Connected to database successfully!
-priyansh.failConnectDatabase=Failed to connect to database, error: %1
+arsh.newVersionDetected=𝐘𝐨𝐮 𝐚𝐫𝐞 𝐮𝐬𝐢𝐧𝐠 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 %1, 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐢𝐬 %2. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐩𝐝𝐚𝐭𝐞 𝐭𝐨 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐟𝐨𝐫 𝐛𝐞𝐭𝐭𝐞𝐫 𝐛𝐨𝐭 𝐩𝐞𝐫𝐟𝐨𝐫𝐦𝐚𝐧𝐜𝐞. 𝐅𝐨𝐫 𝐮𝐩𝐝𝐚𝐭𝐞 𝐭𝐲𝐩𝐞 𝐢𝐧 𝐜𝐨𝐧𝐬𝐨𝐥𝐞/𝐜𝐦𝐝: 𝐧𝐨𝐝𝐞 𝐮𝐩𝐝𝐚𝐭𝐞
+arsh.errorFormat=Malformed module!
+arsh.nameExist=Module's name is similar to another module!
+arsh.notFoundLanguage=Module %1 don't support your language
+arsh.notFoundPackage=Can't find package %1 support for module %2, installing...
+arsh.cantInstallPackage=Can't install package %1 for module %2, error: %3
+arsh.loadedPackage=Installed whole package successfully for module %1
+arsh.loadedConfig=Installed config successfully for module %1
+arsh.cantLoadConfig=Can't install config of module %1, error: %2
+arsh.cantOnload=Can't launch setup of module %1, error: %1
+arsh.successLoadModule=Successfully installed module %1
+arsh.failLoadModule=Can't install module %1, error: %2
+arsh.finishLoadModule=Installed %1 module commands and %2 module events successfully 
+arsh.foundPathAppstate=Found appstate file now logging in...
+arsh.notFoundPathAppstate=Error can't find appstate file maybe file is malformed!
+arsh.checkListGban=Checking global ban list...
+arsh.banDevice=Your device have been banned from ArshKingProject, please contact the owner to know more information.
+arsh.keyNotSameFormat=Wrong format, code must contain 6 number.
+arsh.codeInputExpired=Your code is wrong or out of date.
+arsh.unbanDeviceSuccess=Your device are unban now, please restart to use.
+arsh.userBanned=You had been banned from ArshKingProject when %1 with reason: %2.
+arsh.finishCheckListGban=Checked global ban list
+arsh.handleListenError=handleListene has occurred some unexpected errorr, error : %1
+arsh.warningSourceCode=DETECTED THAT SOURCE CODE'S STRUCTURE HAD BEEN CHANGED , STOP NOW!
+arsh.refreshListen=Refreshed handleListener...
+arsh.successConnectDatabase=Connected to database successfully!
+arsh.failConnectDatabase=Failed to connect to database, error: %1
 
 # includes/handle/handleCommand.js
 
