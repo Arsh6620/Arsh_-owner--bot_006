@@ -1,89 +1,95 @@
 const chalk = require("chalk");
 
-// Soft Glass Gradient Colors
-const glassPrimary = "#00f5ff";   // Neon Cyan
-const glassSecondary = "#ff00ff"; // Neon Pink
-const glassAccent = "#ffffff";    // White Glow
-const gold = "#ffd700";           // Royal Gold
+// ====== COLOR SYSTEM ======
+const royalGold = "#ffd700";
+const neonCyan = "#00f5ff";
+const neonPink = "#ff00ff";
+const royalPurple = "#8a2be2";
+const glassWhite = "#ffffff";
+const dangerRed = "#ff0033";
+const warnOrange = "#ffaa00";
+const successGreen = "#00ffcc";
 
-function randomGlass() {
-  const colors = ["#00f5ff", "#ff00ff", "#00ffcc", "#8a2be2"];
+function randomNeon() {
+  const colors = [neonCyan, neonPink, royalPurple, "#00ff99"];
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Main Logger
-module.exports = (data, option) => {
+// ====== PREMIUM HEADER ======
+function premiumHeader() {
+  return (
+    chalk.bold.hex(royalPurple)("╔══════════════════════════════════════╗") + "\n" +
+    chalk.bold.hex(royalGold)("        👑  𓆩 𝑨𝑹𝑺𝑯 𝑲𝑰𝑵𝑮 𓆪  👑") + "\n" +
+    chalk.bold.hex(neonCyan)("        💎  ULTRA PREMIUM EDITION  💎") + "\n" +
+    chalk.bold.hex(royalPurple)("╚══════════════════════════════════════╝")
+  );
+}
 
-  const header = chalk.bold.hex(glassPrimary)("╔══════════════════════════════╗");
-  const footer = chalk.bold.hex(glassPrimary)("╚══════════════════════════════╝");
-  const title = chalk.bold.hex(gold)("      👑  𓆩𝑨𝑹𝑺𝑯 𝑲𝑰𝑵𝑮𓆪  👑");
+// ====== MAIN LOGGER ======
+module.exports = (data, option) => {
 
   switch (option) {
 
     case "warn":
       console.log(
-        header + "\n" +
-        title + "\n" +
-        chalk.bold.hex("#ffaa00")("   ⚠ WARNING : ") +
-        chalk.hex(glassAccent)(data) + "\n" +
-        footer
+        premiumHeader() + "\n" +
+        chalk.bold.hex(warnOrange)("   ⚠  WARNING KING  ➜  ") +
+        chalk.hex(glassWhite)(data) + "\n" +
+        chalk.hex(royalGold)("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
       );
       break;
 
     case "error":
       console.log(
-        header + "\n" +
-        title + "\n" +
-        chalk.bold.hex("#ff0033")("   ✖ ERROR : ") +
-        chalk.hex(glassAccent)(data) + "\n" +
-        footer
+        premiumHeader() + "\n" +
+        chalk.bold.hex(dangerRed)("   ❌  ERROR KING  ➜  ") +
+        chalk.hex(glassWhite)(data) + "\n" +
+        chalk.hex(royalGold)("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
       );
       break;
 
     default:
       console.log(
-        header + "\n" +
-        title + "\n" +
-        chalk.bold.hex(randomGlass())("   ✧ LOG : ") +
-        chalk.hex(glassAccent)(data) + "\n" +
-        footer
+        premiumHeader() + "\n" +
+        chalk.bold.hex(randomNeon())("   ✧  ROYAL LOG  ➜  ") +
+        chalk.hex(glassWhite)(data) + "\n" +
+        chalk.hex(royalGold)("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
       );
       break;
   }
 };
 
-// Glass Loader
+// ====== LOADER SYSTEM ======
 module.exports.loader = (data, option) => {
 
-  const glassBox = `
-${chalk.hex(glassSecondary)("╭──────────────────────────────╮")}
-${chalk.bold.hex(gold)("     💎  ARSH KING GLASS UI  💎")}
-${chalk.hex(glassSecondary)("╰──────────────────────────────╯")}
-`;
+  const glassFrame =
+    chalk.hex(neonPink)("╭──────────────────────────────────────╮") + "\n" +
+    chalk.bold.hex(royalGold)("     👑  𓆩♔𓆪 ⚜️ 𓆩𝑨𝑹𝑺𝑯 𝑲𝑰𝑵𝑮𓆪 𝐑𝐎𝐘𝐀𝐋 𝐁𝐎𝐓 ⚜️ 𓆩♔𓆪  👑") + "\n" +
+    chalk.hex(neonPink)("╰──────────────────────────────────────╯");
 
   switch (option) {
 
     case "warn":
       console.log(
-        glassBox +
-        chalk.bold.hex("#ffaa00")("   ⏳ Loading Warning → ") +
-        chalk.hex(glassAccent)(data)
+        glassFrame + "\n" +
+        chalk.bold.hex(warnOrange)("   ⏳  Preparing Kingdom  ➜  ") +
+        chalk.hex(glassWhite)(data)
       );
       break;
 
     case "error":
       console.log(
-        glassBox +
-        chalk.bold.hex("#ff0033")("   ❌ Loading Failed → ") +
-        chalk.hex(glassAccent)(data)
+        glassFrame + "\n" +
+        chalk.bold.hex(dangerRed)("   💀  Kingdom Failure  ➜  ") +
+        chalk.hex(glassWhite)(data)
       );
       break;
 
     default:
       console.log(
-        glassBox +
-        chalk.bold.hex("#00ffcc")("   ✅ Loading Success → ") +
-        chalk.hex(glassAccent)(data)
+        glassFrame + "\n" +
+        chalk.bold.hex(successGreen)("   ⚡  Kingdom Activated  ➜  ") +
+        chalk.hex(glassWhite)(data)
       );
       break;
   }
