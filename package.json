@@ -1,8 +1,8 @@
 {
-  "name": "LEGEND-ARYAN",
+  "name": "ARSH KING",
   "version": "10.1.1",
-  "description": "MADE BY LEGEND-ARYAN 🥀",
-  "main": "LEGEND-ARYAN.js",
+  "description": "MADE BY ARSH KING🥀",
+  "main": "ARSH-KING.js",
   "engines": {
       "node": "20.x",
       "npm": "10.0.0"
@@ -14,7 +14,7 @@
   },
   "repository": {
       "type": "git",
-      "url": "https://github.com/aryan-11/aryan-bot/issues"
+      "url": "https://github.com/arsh-/arsh-bot/issues"
   },
   "keywords": [
       "bot",
@@ -26,12 +26,12 @@
       "prince",
       "mental"
   ],
-  "author": "LEGEND-ARYAN 🥀",
+  "author": "ARSH-KING 🥀",
   "license": "GPL-3.0",
   "bugs": {
-      "url": "https://github.com/aryan-11/aryan-bot/issues"
+      "url": "https://github.com/arsh-/arsh-bot/issues"
   },
-  "homepage": "https://github.com/aryan-11/aryan-bot/issues",
+  "homepage": "https://github.com/arsh-/arsh-bot/issues",
   "dependencies": {
       "fca-priyansh": "^21.0.0",
       "@distube/ytdl-core": "^4.13.2",
