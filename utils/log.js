@@ -1,36 +1,92 @@
-const chalk = require('chalk');
+const chalk = require("chalk");
+
+// Random Royal Color Generator
 function randomColor() {
-    var color = "";
-    for (var i = 0; i < 3; i++) {
-        var sub = Math.floor(Math.random() * 256).toString(16);
-        color += (sub.length == 1 ? "0" + sub : sub);
-    } 
-   return "#" + color;
-};
-module.exports = (data, option) => {
-  switch (option) {
-    case "warn":
-        console.log(chalk.bold.hex("#ff0000").bold('» Log « ') + data);
-      break;
-    case "error":
-      console.log(chalk.bold.hex("#ff0000").bold('» Log « ') + data);
-      break;
-    default:
-        console.log(chalk.bold.hex(randomColor()).bold(`${option} » `) + data);
-      break;
+  let color = "";
+  for (let i = 0; i < 3; i++) {
+    let sub = Math.floor(Math.random() * 256).toString(16);
+    color += sub.length === 1 ? "0" + sub : sub;
   }
+  return "#" + color;
 }
 
-module.exports.loader = (data, option) => {
+// Main Log
+module.exports = (data, option) => {
+  const crown = "👑  𓆩𝑨𝑹𝑺𝑯 𝑲𝑰𝑵𝑮𓆪  👑";
+
   switch (option) {
     case "warn":
-      console.log(chalk.bold.hex(randomColor()).bold(" [ ARSH😘 ] ") + chalk.bold.hex("#8B8878").bold(data)+chalk.bold.hex("FF00DD")("\n✧➜  ╔═══━━━─── • ───━━━═══╗ 👑  𓆩𝑨𝑹𝑺𝑯 𝑲𝑰𝑵𝑮𓆪  👑╚═══━━━─── • ───━━━═══╝" ))
+      console.log(
+        chalk.bold.hex("#ffae00")("⚠ WARNING » ") +
+        chalk.hex("#ffffff")(data) +
+        "\n" +
+        chalk.bold.hex("#ffae00")("━━━━━━━━━━━━━━━━━━━━━━━") +
+        "\n" +
+        chalk.bold.hex("#ffd700")(crown) +
+        "\n" +
+        chalk.bold.hex("#ffae00")("━━━━━━━━━━━━━━━━━━━━━━━")
+      );
       break;
+
     case "error":
-    console.log(chalk.bold.hex(randomColor()).bold(" [ ARSH😘 ] ") + data+chalk.bold.hex("5EFF00")("\n✧➜  ╔═══━━━─── • ───━━━═══╗  👑  𓆩𝑨𝑹𝑺𝑯 𝑲𝑰𝑵𝑮𓆪  👑╚═══━━━─── • ───━━━═══╝" ));
+      console.log(
+        chalk.bold.hex("#ff0000")("✖ ERROR » ") +
+        chalk.hex("#ffffff")(data) +
+        "\n" +
+        chalk.bold.hex("#ff0000")("━━━━━━━━━━━━━━━━━━━━━━━") +
+        "\n" +
+        chalk.bold.hex("#ffd700")(crown) +
+        "\n" +
+        chalk.bold.hex("#ff0000")("━━━━━━━━━━━━━━━━━━━━━━━")
+      );
       break;
+
     default:
-      console.log(chalk.bold.hex(randomColor()).bold(" [ ARSH😘 ] ") + chalk.bold.hex(randomColor()).bold(data) +chalk.bold.hex("FFF0000")("\n✧➜  ✧ ✧ ✧ ✧ ✧ ✧ ARSH KING  ❤️ (👑)✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧" ));
+      console.log(
+        chalk.bold.hex(randomColor())("✧ LOG » ") +
+        chalk.hex("#ffffff")(data) +
+        "\n" +
+        chalk.bold.hex("#8a2be2")("═══════════════════════") +
+        "\n" +
+        chalk.bold.hex("#ffd700")(crown) +
+        "\n" +
+        chalk.bold.hex("#8a2be2")("═══════════════════════")
+      );
       break;
   }
-}
+};
+
+// Loader Style
+module.exports.loader = (data, option) => {
+  const banner = `
+👑 ╔════════════════════════════╗
+   ║      𓆩 𝑨𝑹𝑺𝑯 𝑲𝑰𝑵𝑮 𓆪      ║
+👑 ╚════════════════════════════╝
+`;
+
+  switch (option) {
+    case "warn":
+      console.log(
+        chalk.bold.hex("#ffd700")(banner) +
+        chalk.bold.hex("#ffae00")("⚠ LOADING » ") +
+        chalk.hex("#ffffff")(data)
+      );
+      break;
+
+    case "error":
+      console.log(
+        chalk.bold.hex("#ffd700")(banner) +
+        chalk.bold.hex("#ff0000")("✖ FAILED » ") +
+        chalk.hex("#ffffff")(data)
+      );
+      break;
+
+    default:
+      console.log(
+        chalk.bold.hex("#ffd700")(banner) +
+        chalk.bold.hex("#00ffcc")("✔ SUCCESS » ") +
+        chalk.hex("#ffffff")(data)
+      );
+      break;
+  }
+};
