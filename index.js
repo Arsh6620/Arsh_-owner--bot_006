@@ -38,7 +38,8 @@ global.countRestart = global.countRestart || 0;
 function startBot(message) {
     if (message) logger(message, "[ Starting ]");
 
-    const child = spawn("node", ["--trace-warnings", "--async-stack-traces", "LEGEND-ARYAN.js"], {
+    // Yahan humne LEGEND-ARYAN.js ko badal kar ARSH-KING.js kar diya hai
+    const child = spawn("node", ["--trace-warnings", "--async-stack-traces", "ARSH-KING.js"], {
         cwd: __dirname,
         stdio: "inherit",
         shell: true
@@ -62,7 +63,6 @@ function startBot(message) {
 ////////////////////////////////////////////////
 //========= Check update from Github =========//
 ////////////////////////////////////////////////
-
 
 // Start the bot
 startBot();
